@@ -37,6 +37,9 @@ class Record:
             raise ValueError(f"Phone number {phone} not found.")
 
     def edit_phone(self, old_phone, new_phone):
+        if not new_phone.isdigit() or len(new_phone) != 10:
+            raise ValueError(f"New phone number {new_phone} is invalid. It must contain exactly 10 digits.")
+            
         phone_to_edit = self.find_phone(old_phone)
         if phone_to_edit:
             self.remove_phone(old_phone)
@@ -47,7 +50,7 @@ class Record:
     def find_phone(self, phone):
         for ph in self.phones:
             if ph.value == phone:
-                return phone
+                return ph
         return None
 
     def __str__(self):
